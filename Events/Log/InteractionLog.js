@@ -35,7 +35,8 @@ class InteractionLog extends Event {
       botData.cmdUsed += 1;
       botData.save();
 
-      const channel = await client.channels.cache.get(client.config.logChannel);
+      const channel = client.channels.cache.get(client.config.logChannel);
+      if (!channel || !channel.isTextBased()) return; // log channel not available locally
       const server = interaction.guild?.name || "user";
       const user = interaction.user.username;
       const userId = interaction.user.id;
@@ -52,7 +53,11 @@ class InteractionLog extends Event {
         .setFooter({ text: server })
         .setTimestamp();
 
-      await channel.send({ embeds: [embed] });
+      try {
+        await channel.send({ embeds: [embed] });
+      } catch (err) {
+        // No access to the configured log channel — skip logging quietly.
+      }
     }
   }
 }
