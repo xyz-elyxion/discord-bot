@@ -41,7 +41,7 @@ class Stats extends Command {
     let embed = new EmbedBuilder()
       .setColor(Colors.DarkGreen)
       .setTimestamp()
-      .setFooter({ text: "Bettel Counter - 2024" });
+      .setFooter({ text: "Limey Bot - 2024" });
 
     switch (subCmd) {
       case "server":

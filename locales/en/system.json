@@ -21,7 +21,7 @@
             "userSaveUseW": "**Hello <@{{user}}>!** You’ve used **1 out of {{totalSave}} your saves**, you have {{leftSave}} left. You counted **back-to-back**! The next number is **{{nextNum}}**!",
             "numOnlyDisable": "Number Only setting has beed disabled because I dont have `ManageMessages` permission in this channel.",
             "embed": {
-                "des": "Vote **[here]({{link}})** to earn save points, so you can use them next time! For more details, check out /rules."
+                "des": "Use saves wisely! Save points let you fix mistakes. For more details, check out /rules."
             }
         }
     }

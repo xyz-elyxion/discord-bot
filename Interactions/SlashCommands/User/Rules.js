@@ -28,7 +28,7 @@ class Rules extends Command {
         "> 1 • No Skipping Numbers\n> 2 • No Going Back In Numbers\n> 3 • Must alternate counters (except for solo mode)\n> 4 • No Botting, Scripting Or Abusing Bugs\n> 5 • Do Not Intentionally Ruin The Count"
       )
       .setTimestamp()
-      .setFooter({ text: "Bettel Counter - 2024" });
+      .setFooter({ text: "Limey Bot - 2024" });
 
     interaction.reply({ embeds: [embed] });
   }

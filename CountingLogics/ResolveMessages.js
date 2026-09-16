@@ -64,35 +64,21 @@ class ResolveMassages {
         );
         break;
       case "RongFail":
-        embed.setDescription(
-          t("event.counting.embed.des", {
-            lng,
-            link: "https://top.gg/bot/1293072781491044415/vote",
-          })
-        );
         await message.channel.send({
           content: t("event.counting.wrongNum", {
             lng,
             user,
             breakAt: this.count - 1,
           }),
-          embeds: [embed],
         });
         break;
       case "B2BFail":
-        embed.setDescription(
-          t("event.counting.embed.des", {
-            lng,
-            link: "https://top.gg/bot/1293072781491044415/vote",
-          })
-        );
         await message.channel.send({
           content: t("event.counting.B2BCount", {
             lng,
             user,
             breakAt: this.count - 1,
           }),
-          embeds: [embed],
         });
         break;
       case "warning":
