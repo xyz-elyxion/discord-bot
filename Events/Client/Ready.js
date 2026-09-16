@@ -10,8 +10,10 @@ const logger = new Logger();
 
 class Ready extends Event {
   constructor(client) {
+    // discord.js v15 renamed "ready" -> "clientReady"; use the new name directly
+    // to avoid the deprecation warning.
     super(client, {
-      name: Events.ClientReady,
+      name: "clientReady",
     });
   }
 

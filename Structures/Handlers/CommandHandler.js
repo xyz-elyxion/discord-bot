@@ -65,7 +65,7 @@ class CommandHandler {
       const rest = new REST({ version: "10" }).setToken(client.config.botToken);
       await (async () => {
         try {
-          await rest.put(Routes.applicationCommands(client.config.clientId), {
+          await rest.put(Routes.applicationCommands(client.user.id), {
             body: commandArray,
           });
           logger.success(
@@ -73,7 +73,7 @@ class CommandHandler {
           );
           client.config.devGuilds.forEach(async (guild) => {
             await rest.put(
-              Routes.applicationGuildCommands(client.config.clientId, guild.id),
+              Routes.applicationGuildCommands(client.user.id, guild.id),
               {
                 body: devCommandArray,
               }
