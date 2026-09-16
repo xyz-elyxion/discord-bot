@@ -59,10 +59,14 @@ class Toggle extends Command {
       content: `> Counting channel has successfully moved to <#${channel.id}>.`,
       ephemeral: true,
     });
-    await channel.send(
-      `✨ **This channel has been updated as a counting channel!**`
-    );
-    channel.setTopic(client.config.cTopic);
+    try {
+      await channel.send(
+        `✨ **This channel has been updated as a counting channel!**`
+      );
+      await channel.setTopic(client.config.cTopic);
+    } catch (err) {
+      // Missing Send Messages / Manage Channels in that channel — move still applies.
+    }
   }
 }
 

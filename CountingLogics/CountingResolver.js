@@ -87,24 +87,28 @@ class CountingResolver {
     msg.sendMessage();
   }
   react() {
+    const doReact = (emoji) =>
+      this.msg.react(emoji).catch(() => {
+        // Missing Add Reactions permission in the counting channel — skip silently.
+      });
     switch (this.output) {
       case "success":
         if (this.highestCount < this.value) {
-          this.msg.react("🏆");
-        } else this.msg.react(this.reaction.success);
+          doReact("🏆");
+        } else doReact(this.reaction.success);
         break;
       case "rongUseUserSave":
       case "rongGuildUserSave":
       case "B2BUseUserSave":
       case "B2BUseUserSave":
-        this.msg.react(this.reaction.save);
+        doReact(this.reaction.save);
         break;
       case "RongFail":
       case "B2BFail":
-        this.msg.react(this.reaction.fail);
+        doReact(this.reaction.fail);
         break;
       case "warning":
-        this.msg.react(this.reaction.warn);
+        doReact(this.reaction.warn);
         break;
       default:
         break;

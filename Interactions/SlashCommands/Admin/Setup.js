@@ -83,10 +83,14 @@ class Setup extends Command {
           );
         }
         await interaction.reply({ embeds: [embed] });
-        await channel.send(
-          `✨ **This channel has been setuped as a counting channel!**`
-        );
-        channel.setTopic(client.config.cTopic);
+        try {
+          await channel.send(
+            `✨ **This channel has been setuped as a counting channel!**`
+          );
+          await channel.setTopic(client.config.cTopic);
+        } catch (err) {
+          // Missing Send Messages / Manage Channels in that channel — setup still applies.
+        }
         break;
       case "delete":
         if (!setupData) {
