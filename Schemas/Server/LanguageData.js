@@ -1,14 +1,6 @@
-const { Schema, model } = require("mongoose");
+const { Collection } = require("../LocalStore");
 
-const languageData = new Schema({
-  guildId: {
-    type: String,
-    required: true,
-  },
-  lng: {
-    type: String,
-    default: "en",
-  },
+module.exports = new Collection("LanguageData", {
+  guildId: null,
+  lng: "en",
 });
-
-module.exports = model("LanguageData", languageData);

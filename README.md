@@ -8,16 +8,24 @@ A powerful and customizable counting bot for Discord servers. Keep track of coun
 - Tracks counting progress
 - Logs counting activities to a dedicated channel
 - Supports multiple servers
-- Redis and MongoDB integration for efficient data management
+- **100% local data storage** — no MongoDB, Redis, or external services required
 - Admin controls and developer features
+
+## Local Data Storage
+
+All data (user scores, game state, setups, languages) is stored in a single local JSON file:
+
+```
+data/localdb.json
+```
+
+The file is created automatically on first run. A lightweight in-memory cache speeds up frequent reads, and every change is persisted immediately. To back up or reset the bot's data, simply copy or delete this file.
 
 ## Setup & Installation
 
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) v16 or later
-- [MongoDB](https://www.mongodb.com/) database
-- [Redis](https://redis.io/) server
 - A Discord bot token from the [Discord Developer Portal](https://discord.com/developers/applications)
 
 ### Installation Steps
@@ -34,9 +42,6 @@ A powerful and customizable counting bot for Discord servers. Keep track of coun
 3. Create a `.env` file in the project root and add your credentials:
    ```env
    token="your bot token"
-   mongoUrl="mongodb+srv://xyz"
-   logWebhook="https://discord.com/api/webhooks/xyz"
-   redis="redis://xyz"
    ```
 4. Run the bot:
    ```sh
@@ -48,8 +53,6 @@ A powerful and customizable counting bot for Discord servers. Keep track of coun
 Modify `config.js` to set up bot settings:
 
 - `botToken`: Your Discord bot token
-- `mongoUrl`: MongoDB connection string
-- `redis`: Redis database URL
 - `clientId`: Bot's client ID
 - `logChannel`: Log channel ID
 - `voteLog`: Voting log channel ID
@@ -60,7 +63,6 @@ Modify `config.js` to set up bot settings:
 - `betaTestGuilds`: List of beta test servers
 - `cTopic`: Counting rules message
 - `voteUrl`: URL to vote for the bot
-- `logWebhook`: Webhook URL for logging
 
 ## Counting Rules
 
@@ -77,4 +79,3 @@ For issues or suggestions, open an issue on the [GitHub repository](https://gith
 ## License
 
 This project is licensed under the MIT License. See `LICENSE` for details.
-

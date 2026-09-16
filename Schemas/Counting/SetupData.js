@@ -1,24 +1,8 @@
-const { Schema, model } = require("mongoose");
+const { Collection } = require("../LocalStore");
 
-const setupData = new Schema({
-  guildId: {
-    type: String,
-    required: true,
-  },
-  setupChannel: {
-    type: String,
-    required: true,
-  },
-  math: {
-    type: Boolean,
-    required: false,
-    default: true,
-  },
-  numOnly: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
+module.exports = new Collection("SetupData", {
+  guildId: null,
+  setupChannel: null,
+  math: true,
+  numOnly: false,
 });
-
-module.exports = model("SetupData", setupData);

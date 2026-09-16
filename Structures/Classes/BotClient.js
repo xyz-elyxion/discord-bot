@@ -1,5 +1,5 @@
 const { Client, Collection } = require("discord.js");
-const Redis = require("ioredis");
+const { LocalCache } = require("../../Schemas/LocalStore");
 const { EventHandler } = require("../Handlers/EventHandler");
 const { Logger } = require("../Functions/index");
 const Config = require("../../config");
@@ -17,7 +17,7 @@ class BotClient extends Client {
     this.autoComplete = new Collection();
     this.slashCommands = new Collection();
     this.db = db;
-    this.redis = new Redis(this.config.redis);
+    this.redis = new LocalCache(); // in-memory cache, Redis-like surface
   }
   async start() {
     await this.registerModules();

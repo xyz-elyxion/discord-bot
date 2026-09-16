@@ -30,7 +30,7 @@ class Ready extends Event {
     logger.success(`${client.user.username}(#${client.cluster.id}) is ready!`);
 
     try {
-      await client.db.ConnectMongo(client);
+      await client.db.ConnectLocal(client);
     } catch (error) {
       logger.error(error);
     }

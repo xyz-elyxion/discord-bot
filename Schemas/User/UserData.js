@@ -1,46 +1,11 @@
-const { Schema, model } = require("mongoose");
+const { Collection } = require("../LocalStore");
 
-const userData = new Schema({
-  userId: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    default: "undefined"
-  },
-  score: {
-    type: Number,
-    default: 0,
-  },
-  count: {
-    right: {
-      type: Number,
-      default: 0,
-    },
-    rong: {
-      type: Number,
-      default: 0,
-    },
-  },
-  saves: {
-    type: Number,
-    default: 2,
-  },
-  saveSlot: {
-    type: Number,
-    default: 4,
-  },
-  vote: {
-    count: {
-      type: Number,
-      default: 0,
-    },
-    time: {
-      type: Date,
-      default: new Date(0),
-    },
-  },
+module.exports = new Collection("UserData", {
+  userId: null,
+  name: "undefined",
+  score: 0,
+  count: { right: 0, rong: 0 },
+  saves: 2,
+  saveSlot: 4,
+  vote: { count: 0, time: new Date(0) },
 });
-
-module.exports = model("UserData", userData);

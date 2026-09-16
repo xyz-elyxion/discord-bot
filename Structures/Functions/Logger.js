@@ -1,10 +1,3 @@
-const { EmbedBuilder, WebhookClient, Colors } = require("discord.js");
-const { inspect } = require("util");
-const config = require("../../config");
-const webhook = new WebhookClient({
-  url: config.logWebhook,
-});
-
 class Logger {
   constructor() {
     this.origin = this._getLogOrigin().split(/[\\/]/).pop();
@@ -37,94 +30,38 @@ class Logger {
     return filename;
   }
 
-  error(content) {
-    const output =
+  _format(emoji, content, width = 20) {
+    return (
       new Date().toLocaleTimeString() +
-      `  🛑  [` +
+      `  ${emoji}  [` +
       `${
         this.origin.length > 25
           ? this.origin.substring(0, 17) + "..."
           : this.origin
       }` +
       `] ` +
-      " ".repeat(20 - (this.origin.length > 20 ? 20 : this.origin.length)) +
+      " ".repeat(width - (this.origin.length > width ? width : this.origin.length)) +
       "| " +
-      content;
-    webhook.send({
-      content: `> \`\`\`${output}\`\`\``,
-    });
-    console.log(output);
+      content
+    );
+  }
+
+  error(content) {
+    console.log(this._format("🛑", content));
   }
 
   info(content) {
-    const output =
-      new Date().toLocaleTimeString() +
-      `  ✉️   [` +
-      `${
-        this.origin.length > 25
-          ? this.origin.substring(0, 17) + "..."
-          : this.origin
-      }` +
-      `] ` +
-      " ".repeat(20 - (this.origin.length > 20 ? 20 : this.origin.length)) +
-      "| " +
-      content;
-    webhook.send({
-      content: `> \`\`\`${output}\`\`\``,
-    });
-    console.log(output);
+    console.log(this._format("✉️", content));
   }
   warn(content) {
-    const output =
-      new Date().toLocaleTimeString() +
-      `  ⚠️   [` +
-      `${
-        this.origin.length > 25
-          ? this.origin.substring(0, 17) + "..."
-          : this.origin
-      }` +
-      `] ` +
-      " ".repeat(20 - (this.origin.length > 20 ? 20 : this.origin.length)) +
-      "| " +
-      content;
-    webhook.send({
-      content: `> \`\`\`${output}\`\`\``,
-    });
-    console.log(output);
+    console.log(this._format("⚠️", content));
   }
 
   success(content) {
-    const output =
-      new Date().toLocaleTimeString() +
-      `  ✅  [` +
-      `${
-        this.origin.length > 25
-          ? this.origin.substring(0, 17) + "..."
-          : this.origin
-      }` +
-      `] ` +
-      " ".repeat(20 - (this.origin.length > 20 ? 20 : this.origin.length)) +
-      "| " +
-      content;
-    webhook.send({
-      content: `> \`\`\`${output}\`\`\``,
-    });
-    console.log(output);
+    console.log(this._format("✅", content));
   }
   custom(content) {
-    console.log(
-      new Date().toLocaleTimeString() +
-        `  🛑  [` +
-        `${
-          this.origin.length > 20
-            ? this.origin.substring(0, 17) + "..."
-            : this.origin
-        }` +
-        `] ` +
-        " ".repeat(20 - (this.origin.length > 20 ? 20 : this.origin.length)) +
-        "| " +
-        content
-    );
+    console.log(this._format("🛑", content));
   }
 }
 

@@ -1,18 +1,7 @@
-const { Schema, model } = require("mongoose");
+const { Collection } = require("../LocalStore");
 
-const botSchema = new Schema({
-  password: {
-    type: String,
-    required: true,
-  },
-  cmdUsed: {
-    type: Number,
-    default: 0,
-  },
-  count: {
-    type: Number,
-    default: 0,
-  },
+module.exports = new Collection("BotDatas", {
+  password: null,
+  cmdUsed: 0,
+  count: 0,
 });
-
-module.exports = model("BotDatas", botSchema);
